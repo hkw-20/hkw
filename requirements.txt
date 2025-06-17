@@ -1,0 +1,19 @@
+# 核心依赖
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics==8.3.27
+
+# 模型导出/转换
+onnx>=1.14.0
+onnxruntime>=1.16.0
+tensorrt>=8.6.1
+
+# 数据处理
+numpy>=1.24.0
+opencv-python>=4.7.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# 系统/工具
+pyyaml>=6.0
