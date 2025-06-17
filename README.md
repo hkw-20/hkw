@@ -1,7 +1,5 @@
 YOLOv8 with CBAM Attention Module
 
-
-
 这个项目在YOLOv8模型中集成了CBAM（Convolutional Block Attention Module）注意力机制，显著提升了目标检测的精度。项目包含完整的训练流程、模型验证、ONNX导出和TensorRT加速实现。
 目录
 
@@ -40,7 +38,7 @@ YOLOv8 with CBAM Attention Module
     🔧 模块化设计，易于扩展到其他YOLO版本
 
 文件结构
-bash
+
 
 ├── configs/
 │   └── yolov8n_cbam.yaml       # YOLOv8n with CBAM 模型配置文件
@@ -59,8 +57,6 @@ bash
 
 快速开始
 环境安装
-bash
-
 # 创建Python环境（推荐使用Python 3.8+）
 conda create -n yolo_cbam python=3.8
 conda activate yolo_cbam
@@ -69,8 +65,6 @@ conda activate yolo_cbam
 pip install -r requirements.txt
 
 训练模型
-bash
-
 # 使用YAML配置文件训练
 python utils/train.py --cfg configs/yolov8n_cbam.yaml
 
@@ -78,8 +72,6 @@ python utils/train.py --cfg configs/yolov8n_cbam.yaml
 python utils/create_and_train.py
 
 模型导出与转换
-bash
-
 # 导出为ONNX格式
 python models/export_onnx.py
 
@@ -92,8 +84,6 @@ python models/onnx_to_tensorrt.py \
 
 模型结构
 CBAM模块实现
-python
-
 # models/cbam.py
 
 class CBAM(nn.Module):
@@ -105,11 +95,8 @@ class CBAM(nn.Module):
     def forward(self, x):
         out = self.channel_attention(x) * x
         out = self.spatial_attention(out) * out
-        return out
-
+        return out  
 YOLOv8 with CBAM 配置
-yaml
-
 # configs/yolov8n_cbam.yaml
 
 backbone:
@@ -118,7 +105,6 @@ backbone:
   # ...后续层...
   - [-1, 1, CBAM, [128]]         # 在P4/16输出后添加CBAM模块
   # ...剩余结构...
-
 性能优势
 
 集成CBAM注意力模块的YOLOv8模型具有以下优势：
@@ -141,47 +127,3 @@ YOLOv8n	0.78	120	3.2	-
 YOLOv8n+CBAM	0.85	115	3.3	+7%
 
     注：CBAM模块仅增加0.1M参数，却带来7%的mAP提升，推理速度仅下降4%
-
-使用示例
-创建并训练模型
-python
-
-# utils/create_and_train.py
-
-def main():
-    # 创建模型
-    model = create_model()
-    
-    # 验证模型结构
-    model.info(verbose=True)
-    
-    # 测试前向传播
-    test_input = torch.randn(1, 3, 640, 640)
-    output = model.model(test_input)
-    
-    # 开始训练
-    results = model.train(
-        data='hkw.yaml',
-        epochs=40,
-        imgsz=640,
-        workers=8,
-        batch=4,
-        name='yolov8_cbam'
-    )
-
-导出ONNX模型
-python
-
-# models/export_onnx.py
-
-# 加载训练好的模型
-model = YOLO('/path/to/best.pt')
-
-# 导出为ONNX格式
-model.export(
-    format='onnx',
-    dynamic=False,
-    simplify=True,
-    opset=12,
-    imgsz=[640, 640]
-)
