@@ -30,7 +30,7 @@ python3 tenserrt.py #导出engine
 ### 预期训练结果
 
 #### 
-模型	         mAP@0.5  	mAP@0.5:0.95    	参数量(M)   	GFLOPs	  推理时间(ms)    	FPS
+模型	     mAP@0.5  	mAP@0.5:0.95    	参数量(M)   	GFLOPs	  推理时间(ms)    	FPS
 #### 
 YOLOv8n       	0.856	      0.678	          3.1	         8.7	       6.5	         154
 ####
