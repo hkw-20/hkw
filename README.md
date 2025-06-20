@@ -1,42 +1,37 @@
-# 这是一个改进yolov8引入cbam的代码
-## 代码的使用
-### 环境的安装
+# Improved YOLOv8 Code with CBAM Integration
+## Code Usage
+### Environment Installation
 pip install requirements.txt
-这可以安装所有的依赖库可能有些库下不了请联系15057840059@163.com我会帮你解决
-### 训练模型
- 首先训练没有引入cbam模块的模型
- 导入自己的数据集修改自己的yaml路径让其能够训练自己的数据集建议将本文件里面的代码全部放入Ultralytics 8.3.27文件夹中方便使用
- #### 
- conda activate your_env  #切换conda环境
- #### 
- cd /home/robot/your_space/yolov8_cbam
- #### 
- python train_v8.py
- ### 训练cbam
- 训练引入cbam模块的代码
- #### 
- conda activate your_env 
- #### 
- cd /home/robot/your_space/yolov8_cbam
- #### 
-python train_cbam.py
-### 模型的导出
-#### 
+If any libraries fail to install, contact 15057840059@163.com for assistance.
+
+### Model Training
+First train the baseline model without CBAM module:  
+Import your dataset and modify the YAML configuration path to train on your custom dataset.  
+Recommend placing all code in the `Ultralytics 8.3.27` folder for compatibility.
+
+conda activate your_env  # Switch conda environment
+cd /home/robot/your_space/yolov8_cbam
+python train_v8.py
+
+### Training with CBAM
+Train the improved model with CBAM module:
 conda activate your_env 
-#### 
-python3 onnx.py #导出onnx模型
-#### 
-python3 tenserrt.py #导出engine
-### 预期训练结果
+cd /home/robot/your_space/yolov8_cbam
+python train_cbam.py
+
+### Model Export
+conda activate your_env 
+python3 onnx.py  # Export ONNX model
+python3 tenserrt.py  # Export TensorRT engine
+
+### Expected Training Results
 
 Model           | mAP@0.5 | mAP@0.5:0.95 | Params (M) | GFLOPs | Inference (ms) | FPS
 --------------- | ------- | ------------ | ---------- | ------ | -------------- | ---
 YOLOv8n         | 0.856   | 0.678        | 3.1        | 8.7    | 6.5            | 154
 YOLOv8n-CBAM    | 0.872   | 0.695        | 3.3        | 9.1    | 7.0            | 143
-### 性能说明
-#### 
-mAP@0.5提升1.6%，mAP@0.5:0.95提升1.7%
-####
-参数量仅增加6.5%，推理时间增加7.7%
-####
-在复杂场景下（遮挡、小目标）提升效果更明显
+
+### Performance Summary
+mAP@0.5 improved by 1.6%, mAP@0.5:0.95 improved by 1.7%
+Parameters increased by only 6.5%, inference time increased by 7.7%
+More significant improvements in complex scenarios (occlusion, small objects)
