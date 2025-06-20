@@ -7,7 +7,7 @@ pip install requirements.txt
  首先训练没有引入cbam模块的模型
  导入自己的数据集修改自己的yaml路径让其能够训练自己的数据集建议将本文件里面的代码全部放入Ultralytics 8.3.27文件夹中方便使用
  #### 
- conda actiavte your_env  #切换conda环境
+ conda activate your_env  #切换conda环境
  #### 
  cd /home/robot/your_space/yolov8_cbam
  #### 
@@ -15,14 +15,14 @@ pip install requirements.txt
  ### 训练cbam
  训练引入cbam模块的代码
  #### 
- conda actiavte your_env 
+ conda activate your_env 
  #### 
  cd /home/robot/your_space/yolov8_cbam
  #### 
 python train_cbam.py
 ### 模型的导出
 #### 
-conda actiavte your_env 
+conda activate your_env 
 #### 
 python3 onnx.py #导出onnx模型
 #### 
